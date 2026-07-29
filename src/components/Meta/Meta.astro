@@ -7,11 +7,11 @@ import { getLocalBusinessSchema } from "@js/localBusinessSchema.js";
 // Props and Types
 type HeroImage = GetImageResult | ImageMetadata;
 
-interface Props {
-	title?: string; // Override default title
-	description?: string; // Override default description
-	heroImage?: HeroImage | ImageMetadata; // Can be optimized hero OR raw ImageMetadata
-}
+type Props = {
+  title?: string; // Override default title
+  description?: string; // Override default description
+  heroImage?: HeroImage | ImageMetadata; // Can be optimized hero OR raw ImageMetadata
+};
 
 const { title = SITE.title, description = SITE.description, heroImage } = Astro.props;
 
@@ -23,7 +23,7 @@ const canonical = Astro.url.href;
 const isHomePage = Astro.url.pathname === "/";
 
 // Format page title with business name (and location if home page)
-const pageTitle = isHomePage ? `${title} | ${BUSINESS.name} | ${BUSINESS.address.city}, ${BUSINESS.address.state}` : `${title} | ${BUSINESS.name}`;
+const pageTitle = isHomePage ? `${ title } | ${ BUSINESS.name } | ${ BUSINESS.address.city }, ${ BUSINESS.address.state }` : `${ title } | ${ BUSINESS.name }`;
 
 // OG type is hardcoded since it rarely changes
 const ogType = "website";
@@ -36,23 +36,23 @@ const ogDescription = description;
 let socialImage: string;
 
 if (heroImage) {
-	// Check if it's already optimized (has .src property) or needs optimization
-	if ("src" in heroImage && typeof heroImage.src === "string") {
-		// Already optimized by page (GetImageResult or ContentImage)
-		socialImage = Astro.url.origin + heroImage.src;
-	} else {
-		// Raw ImageMetadata - optimize it for OG
-		const optimizedImage = await getImage({
-			src: heroImage as ImageMetadata,
-			width: 1200,
-			height: 600,
-			format: "webp",
-		});
-		socialImage = Astro.url.origin + optimizedImage.src;
-	}
+  // Check if it's already optimized (has .src property) or needs optimization
+  if ("src" in heroImage && typeof heroImage.src === "string") {
+    // Already optimized by page (GetImageResult or ContentImage)
+    socialImage = Astro.url.origin + heroImage.src;
+  } else {
+    // Raw ImageMetadata - optimize it for OG
+    const optimizedImage = await getImage({
+      src: heroImage as ImageMetadata,
+      width: 1200,
+      height: 600,
+      format: "webp",
+    });
+    socialImage = Astro.url.origin + optimizedImage.src;
+  }
 } else {
-	// Default social image (static file in public/)
-	socialImage = Astro.url.origin + OG.image;
+  // Default social image (static file in public/)
+  socialImage = Astro.url.origin + OG.image;
 }
 ---
 

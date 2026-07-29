@@ -1,7 +1,7 @@
 ---
 /**
- * * This page generates the individual blog posts based on the blog collection
- **/
+ * This page generates the individual blog posts based on the blog collection
+ */
 
 // Utils
 import { getCollection, render } from "astro:content";
@@ -11,11 +11,11 @@ import BlogPostLayout from "@layouts/BlogPostLayout.astro";
 
 // Generates the individual blog pages
 export async function getStaticPaths() {
-	const posts = await getCollection("blog");
-	return posts.map((entry) => ({
-		params: { post: entry.id },
-		props: { post: entry },
-	}));
+  const posts = await getCollection("blog");
+  return posts.map((entry) => ({
+    params: { post: entry.id },
+    props: { post: entry },
+  }));
 }
 
 const { post } = Astro.props;
@@ -23,5 +23,5 @@ const { Content, headings } = await render(post);
 ---
 
 <BlogPostLayout post={post} headings={headings}>
-	<Content />
+  <Content />
 </BlogPostLayout>

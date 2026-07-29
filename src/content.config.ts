@@ -6,19 +6,19 @@ import { glob } from "astro/loaders";
 // Doc: https://docs.astro.build/en/guides/images/#images-in-content-collections
 
 const blogsCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			author: z.string(),
-			date: z.date(),
-			image: image(),
-			imageAlt: z.string(),
-			isFeatured: z.boolean().optional().default(false),
-		}),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/blog" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      author: z.string(),
+      date: z.date(),
+      image: image(),
+      imageAlt: z.string(),
+      isFeatured: z.boolean().optional().default(false),
+    }),
 });
 
 export const collections = {
-	blog: blogsCollection,
+  blog: blogsCollection,
 };

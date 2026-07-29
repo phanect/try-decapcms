@@ -16,44 +16,44 @@ import { SITE } from "@data/client";
 // Create a union type for heroImage
 type HeroImage = GetImageResult | ImageMetadata;
 
-interface Props {
-	title: string;
-	description: string;
-	heroImage?: HeroImage; // optional - passing a heroImage to BaseLayout will 1. preload the image and 2. use the image for og socials tags in the <head>
-}
+type Props = {
+  title: string;
+  description: string;
+  heroImage?: HeroImage; // optional - passing a heroImage to BaseLayout will 1. preload the image and 2. use the image for og socials tags in the <head>
+};
 
-const { description, title, heroImage } = Astro.props as Props;
+const { description, title, heroImage } = Astro.props;
 ---
 
 <html lang={SITE.locale}>
-	<head>
-		<!-- View Transitions support -->
-		<ClientRouter />
+  <head>
+    <!-- View Transitions support -->
+    <ClientRouter />
 
-		<!-- SEO Meta Tags -->
-		<Meta title={title} description={description} heroImage={heroImage}>
-			<slot name="schema" slot="schema" />
-		</Meta>
+    <!-- SEO Meta Tags -->
+    <Meta title={title} description={description} heroImage={heroImage}>
+      <slot name="schema" slot="schema" />
+    </Meta>
 
-		<!-- Astro custom Font API -->
-		<Font cssVariable="--font-primary" />
+    <!-- Astro custom Font API -->
+    <Font cssVariable="--font-primary" />
 
-		<!-- If present, preloads the image passed as a prop -->
-		{heroImage && <link rel="preload" href={heroImage.src} as="image" />}
+    <!-- If present, preloads the image passed as a prop -->
+    {heroImage && <link rel="preload" href={heroImage.src} as="image" />}
 
-		<!-- Sitewide Scripts -->
-		<script src="@js/nav.js"></script>
-	</head>
-	<body>
-		<!-- Screen reader skip main nav -->
-		<a class="skip" aria-label="skip to main content" href="#main"
-			>Click To Skip To Main Content</a
-		>
+    <!-- Sitewide Scripts -->
+    <script src="@js/nav.js"></script>
+  </head>
+  <body>
+    <!-- Screen reader skip main nav -->
+    <a class="skip" aria-label="skip to main content" href="#main"
+      >Click To Skip To Main Content</a
+    >
 
-		<DynamicHeader />
-		<main id="main">
-			<slot />
-		</main>
-		<Footer />
-	</body>
+    <DynamicHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

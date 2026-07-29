@@ -640,12 +640,12 @@ Customize site-wide colors, fonts and other properties in `src/styles/root.less`
 
 ```less
 :root {
-	--primary: #aff425;
-	--primaryLight: #7aa329;
-	--secondary: #ffba43;
-	--bodyTextColor: #4e4b66;
-	--bodyTextColorWhite: #fafbfc;
-	// ... more variables
+  --primary: #aff425;
+  --primaryLight: #7aa329;
+  --secondary: #ffba43;
+  --bodyTextColor: #4e4b66;
+  --bodyTextColorWhite: #fafbfc;
+  // ... more variables
 }
 ```
 
@@ -659,20 +659,20 @@ This kit comes with Roboto font, and makes use of the Astro Fonts API. No more l
 
     ```json
     {
-    	provider: fontProviders.fontsource(),
-    	name: "IBM Plex Mono",
+      provider: fontProviders.fontsource(),
+      name: "IBM Plex Mono",
     },
     ```
 
 If you want to use a second custom font, add it to the `font` array shown above, and use it in a `<Font />` component in `BaseLayout.astro`. You can now define styles with your font’s cssVariable to apply your custom font.
 
     ```jsx
-    	<Font cssVariable="--font-secondary" />
+      <Font cssVariable="--font-secondary" />
     ```
 
     ```css
     .cs-topper {
-    	font-family: var(--font-secondary);
+      font-family: var(--font-secondary);
     }
     ```
 
@@ -737,9 +737,9 @@ BaseLayout accepts simple props with sensible defaults from `client.ts`:
 
 ```typescript
 interface Props {
-	title?: string; // Page title (defaults to SITE.title)
-	description?: string; // Meta description (defaults to SITE.description)
-	heroImage?: HeroImage; // Optional social sharing image
+  title?: string; // Page title (defaults to SITE.title)
+  description?: string; // Meta description (defaults to SITE.description)
+  heroImage?: HeroImage; // Optional social sharing image
 }
 ```
 
@@ -816,18 +816,18 @@ For schemas used across multiple pages, create helper functions following the ex
 import { SITE } from "@data/client";
 
 export function getFAQSchema(faqs) {
-	return {
-		"@context": "https://schema.org",
-		"@type": "FAQPage",
-		mainEntity: faqs.map((item) => ({
-			"@type": "Question",
-			name: item.question,
-			acceptedAnswer: {
-				"@type": "Answer",
-				text: item.answer,
-			},
-		})),
-	};
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
 }
 ```
 
@@ -974,10 +974,10 @@ In the rendered HTML `<head>`:
 
 ```html
 <link
-	rel="preload"
-	as="image"
-	href="/optimized-hero.webp"
-	fetchpriority="high"
+  rel="preload"
+  as="image"
+  href="/optimized-hero.webp"
+  fetchpriority="high"
 />
 ```
 
@@ -1187,14 +1187,14 @@ The sitemap is pre-configured in `astro.config.mjs`. Here's what's included:
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-	site: "https://yourwebsite.com", // Replace with your site URL
-	integrations: [
-		sitemap({
-			filter: (page) => !page.includes("/admin"),
-			changefreq: "weekly",
-			priority: 0.7,
-		}),
-	],
+  site: "https://yourwebsite.com", // Replace with your site URL
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/admin"),
+      changefreq: "weekly",
+      priority: 0.7,
+    }),
+  ],
 });
 ```
 

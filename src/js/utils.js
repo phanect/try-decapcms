@@ -36,5 +36,5 @@ export function toKebabCase(str) {
  * @returns {string} Dropdown toggle ID (e.g., "projects-dropdown-toggle")
  */
 export function getDropdownId(key) {
-  return `${toKebabCase(key)}-dropdown-toggle`;
+  return `${ toKebabCase(key) }-dropdown-toggle`;
 }
