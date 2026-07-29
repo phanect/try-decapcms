@@ -25,12 +25,8 @@
 		"performance"
 	],
 	"scripts": {
-		"astro": "astro dev",
 		"dev": "astro dev",
-		"start": "astro dev",
 		"build": "astro build",
-		"preview": "astro preview",
-		"remove-decap": "node scripts/remove-decap.js",
 		"remove-dark-mode": "node scripts/remove-dark-mode.js"
 	},
 	"dependencies": {
