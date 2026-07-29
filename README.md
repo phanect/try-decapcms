@@ -1380,3 +1380,9 @@ I hope that this kit will prove useful to you. If you have any questions or woul
 
 Happy coding!
 **_Geoffrey_**
+
+## License & Credits
+
+Licensed under the [CC0 1.0 Universal](./LICENSE.txt).
+
+See [CREDITS.md](./docs/credits/CREDITS.md) for the credits.
