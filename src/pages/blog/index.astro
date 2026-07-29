@@ -10,9 +10,7 @@ import "@styles/sidebar.less";
 
 // Components
 import BaseLayout from "@layouts/BaseLayout.astro";
-import Banner from "@components/Banner/Banner.astro";
 import BlogRecentArticlesWithSidebar from "@layouts/BlogRecentArticlesWithSidebar.astro";
-import CTA from "@components/CTA/CTASimple.astro";
 
 // Images
 import placeholderImage from "@assets/images/placeholder.jpg";
@@ -23,12 +21,9 @@ posts.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).val
 ---
 
 <BaseLayout title="Blog" description="Meta description for the page" heroImage={placeholderOptimizedImage}>
-	<Banner title="Blog" image={placeholderOptimizedImage} />
-
 	<!-- Use the BlogRecentArticles layout to display the recent articles in a standard grid -->
 	<!-- <BlogRecentArticles posts={posts} /> -->
 
 	<!-- Use the BlogRecentArticlesWithSidebar layout to display the recent articles in a custom sidebar layout-->
 	<BlogRecentArticlesWithSidebar posts={posts} />
-	<CTA />
 </BaseLayout>

@@ -31,7 +31,6 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"remove-decap": "node scripts/remove-decap.js",
-		"remove-demo": "node scripts/remove-demo.js",
 		"remove-dark-mode": "node scripts/remove-dark-mode.js"
 	},
 	"dependencies": {

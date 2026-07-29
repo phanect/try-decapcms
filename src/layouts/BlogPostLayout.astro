@@ -11,7 +11,6 @@ import "@styles/markdown.less";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import FeaturedPost from "@components/FeaturedPost/FeaturedPost.astro";
 import TableOfContents from "@components/TableOfContents/TableOfContents.astro";
-import CTA from "@components/CTA/CTASimple.astro";
 
 const { post } = Astro.props;
 const { title, date, description, image, imageAlt, author } = post.data;
@@ -90,7 +89,6 @@ const blogPostingSchema = getBlogPostingSchema(
 		</aside>
 	</div>
 
-	<CTA />
 </BaseLayout>
 
 <style lang="less">
