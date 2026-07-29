@@ -1,6 +1,5 @@
 {
   "name": "intermediate-astro-decap-cms-starter-kit",
-  "type": "module",
   "version": "4.0.0",
   "description": "An Astro v7 starter kit with five pre-built pages, a Decap CMS blog, LESS preprocessing, dark mode, SEO (Open Graph, JSON-LD, sitemap), Astro image optimization, and View Transitions. While this starter kit was built for CodeStitch users and agency owners in mind, it can be used with your OWN HTML and CSS. ",
   "repository": {
@@ -24,6 +23,7 @@
     "seo",
     "performance"
   ],
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build"

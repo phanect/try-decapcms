@@ -90,11 +90,7 @@ import navData from "@data/navData.json";
                     href={entry.url}
                     class:list={[
                       "cs-li-link",
-                      {
-                        "cs-active":
-                          Astro.url.pathname ===
-                          entry.url,
-                      },
+                      { "cs-active": Astro.url.pathname === entry.url },
                     ]}
                     aria-current={isCurrentPage(
                       Astro.url.pathname,

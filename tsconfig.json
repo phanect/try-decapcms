@@ -1,7 +1,5 @@
 {
   "extends": "astro/tsconfigs/base",
-  "include": [ ".astro/types.d.ts", "**/*" ],
-  "exclude": [ "**/dist/**" ],
   "compilerOptions": {
     // necessary for Astro content collections
     "strictNullChecks": true,
@@ -19,5 +17,12 @@
     },
     "incremental": true,
     "skipLibCheck": true
-  }
+  },
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "**/dist/**"
+  ]
 }
