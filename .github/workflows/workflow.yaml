@@ -1,0 +1,115 @@
+name: GitHub Actions
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+permissions:
+  contents: read
+
+jobs:
+  build-lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Remove Podman which does not work well on GitHub Actions
+        run: sudo apt remove -y podman
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: jdx/mise-action@3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518 # v4.2.5.6.4.0.1
+        with:
+          install: true
+          cache: true
+
+      - run: mise lint
+      - run: mise build
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dist
+          path: dist # TODO Change build directory
+          if-no-files-found: error
+          retention-days: 1
+          include-hidden-files: true
+
+  test:
+    name: test on Node.js v${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        node-version:
+          - 20
+          - 22
+          - 24
+    env:
+      # Override Node.js version over mise.toml
+      MISE_NODE_VERSION: ${{ matrix.node-version }}
+    steps:
+      - name: Remove Podman which does not work well on GitHub Actions
+        run: sudo apt remove -y podman
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: jdx/mise-action@3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518 # v4.2.5.6.4.0.1
+        with:
+          install: true
+          cache: true
+
+      - run: mise test
+
+  release:
+    needs:
+      - build-lint
+      - test
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # ▼▼ TODO Only required for Cloudflare Workers ▼▼
+    permissions:
+      contents: read
+      pull-requests: write
+    # ▲▲ TODO Only required for Cloudflare Workers ▲▲
+    steps:
+      - name: Remove Podman which does not work well on GitHub Actions
+        run: sudo apt remove -y podman
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: jdx/mise-action@3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518 # v4.2.5.6.4.0.1
+        with:
+          install: true
+          cache: true
+
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: dist
+          path: dist # TODO Change build directory
+
+      # ▼▼ TODO Add this section if the project is deployed to Cloudflare Workers ▼▼
+      - name: deploy Worker
+        id: deployment
+        uses: cloudflare/wrangler-action@ebbaa1584979971c8614a24965b4405ff95890e0 # v4.0.0
+        with:
+          environment: ${{ github.event_name == 'release' && 'production' || 'staging'  }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Add comment for deployment URL
+        run: "gh pr comment ${{ github.event.number }} --edit-last --create-if-none --body 'Deployed to staging:\n${{ steps.deployment.outputs.pages-deployment-alias-url && steps.deployment.outputs.pages-deployment-alias-url || steps.deployment.outputs.deployment-url }}'"
+      # ▲▲ TODO Add this section if the project is deployed to Cloudflare Workers ▲▲
+
+      # ▼▼ TODO Add this section if the deploy command can be executed with `mise deploy` ▼▼
+      - run: mise deploy
+      # ▲▲ TODO Add this section if the deploy command can be executed with `mise deploy` ▲▲
+
+      # ▼▼ TODO Add this section if the project is an npm package ▼▼
+      - name: Set npm auth token
+        run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > ~/.npmrc
+      - run: mise publish
+      # ▲▲ TODO Add this section if the project is an npm package ▲▲
