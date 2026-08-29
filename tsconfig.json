@@ -1,12 +1,9 @@
 {
-  "extends": "astro/tsconfigs/base",
+  "extends": [
+    "@phanect/configs/ts",
+    "astro/tsconfigs/base",
+  ],
   "compilerOptions": {
-    // necessary for Astro content collections
-    "strictNullChecks": true,
-    // set to true if you want strict checks on your .js files
-    "checkJs": false,
-    "baseUrl": ".",
-    // creates shortcuts for imports
     "paths": {
       "@layouts/*": [ "src/layouts/*" ],
       "@assets/*": [ "src/assets/*" ],
@@ -15,14 +12,13 @@
       "@components/*": [ "src/components/*" ],
       "@js/*": [ "src/js/*" ]
     },
-    "incremental": true,
-    "skipLibCheck": true
   },
   "include": [
     ".astro/types.d.ts",
     "**/*"
   ],
   "exclude": [
+    "**/node_modules/**",
     "**/dist/**"
   ]
 }

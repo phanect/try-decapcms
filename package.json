@@ -20,6 +20,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "lint": "astro check && eslint && npx stylelint \"**/*.{css,scss,less}\"",
+    "fix": "eslint --fix",
     "clean": "git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force",
     "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack enable && corepack up && pnpm install"
   },
@@ -31,7 +33,16 @@
     "less": "^4.6.7"
   },
   "devDependencies": {
-    "netlify-plugin-cache": "^1.0.3"
+    "@astrojs/check": "^0.9.9",
+    "@phanect/configs": "2026.7.9",
+    "@phanect/lint": "latest",
+    "@phanect/lint-astro": "latest",
+    "eslint": "^10.8.0",
+    "jiti": "^2.7.0",
+    "netlify-plugin-cache": "^1.0.3",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "^6.0.0"
   },
   "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }
