@@ -19,7 +19,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build"
+    "build": "astro build",
+    "clean": "git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force",
+    "refresh": "npm run clean && rm --force ./package-lock.json && npm install"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

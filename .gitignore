@@ -1,28 +1,98 @@
-# build output
+#
+# Generic
+#
+
+# PIDs
+*.pid
+*.seed
+*.pid.lock
+pids
+
+# File manager configs
+.directory
+Thumbs.db
+.DS_Store
+
+# Build directory
 dist/
 
-# generated types
-.astro/
+# tmp files
+temp/
+tmp/
 
-# dependencies
+# Logs
+logs/
+*.log
+
+# Archives
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar
+*.tgz
+
+# dotenv
+.env
+.env.*
+!.env.example
+
+# SQLite DB
+*.db
+*.db-journal
+
+# mise
+mise.local.toml
+
+#
+# JavaScript
+#
+
+# NPM / package managers
 node_modules/
+.npm/
+.yarn-integrity
 
-# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# pnpm is the package manager for this project.
+package-lock.json
+yarn.lock
+bun.lockb
+npm-shrinkwrap.json
 
-# environment variables
-.env
-.env.production
+# Node.js
+.node_repl_history
 
-# macOS-specific files
-.DS_Store
+# TypeScript
+*.tsbuildinfo
 
-# jetbrains setting folder
-.idea/
+# Frameworks
+.next/
+next-env.d.ts
+.nuxt/
+out/
+.svelte-kit/
+.astro/
 
-# vscode setting folder
-.vscode/settings.json
+# Platforms
+.wrangler/
+.dev.vars
+worker-configuration.d.ts
+
+.vercel/
+.netlify/
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# ESLint
+.eslintcache
+
+#
+# AI
+#
+.claude/**/*.local.json

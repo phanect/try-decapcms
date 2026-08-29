@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "eslint": {
+      "command": "pnpm",
+      "args": [ "exec", "eslint", "--mcp" ]
+    },
+    "mise": {
+      "command": "mise",
+      "args": [ "mcp" ],
+      "env": {
+        "MISE_EXPERIMENTAL": "1"
+      }
+    }
+  }
+}
