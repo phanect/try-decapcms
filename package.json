@@ -23,7 +23,8 @@
     "lint": "astro check && eslint && npx stylelint \"**/*.{css,scss,less}\"",
     "fix": "eslint --fix",
     "clean": "git clean -dX --exclude=\"!.env\" --exclude=\"!mise.local.toml\" --force",
-    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack enable && corepack up && pnpm install"
+    "refresh": "pnpm run clean && rm --force ./pnpm-lock.yaml && corepack enable && corepack up && pnpm install",
+    "publish": "pnpm -r --stream --if-present --parallel run publish"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
