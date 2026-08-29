@@ -26,8 +26,7 @@
 	],
 	"scripts": {
 		"dev": "astro dev",
-		"build": "astro build",
-		"remove-dark-mode": "node scripts/remove-dark-mode.js"
+		"build": "astro build"
 	},
 	"dependencies": {
 		"@astrojs/sitemap": "^3.7.3",
