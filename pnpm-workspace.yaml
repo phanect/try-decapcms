@@ -3,6 +3,8 @@ minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
   - "@phanect/lint@2026.8.29"
   - "@phanect/lint-astro@2026.8.29"
+  # Renovate security update: astro@7.4.0
+  - astro@7.4.0
 
 allowBuilds:
   esbuild: true
